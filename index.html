@@ -1,43 +1,200 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DANIVIA TV</title>
-  <meta name="description" content="DANIVIA TV - Agenda deportiva, películas y series" />
-  <style>
-    :root{--bg:#050505;--panel:#111;--panel2:#171717;--gold:#f6c343;--gold2:#ffdd75;--text:#fff;--muted:#a1a1aa;--danger:#ef4444;--ok:#22c55e;--border:rgba(246,195,67,.22)}
-    *{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at 50% -10%,rgba(246,195,67,.20),transparent 35%),linear-gradient(180deg,#080808,#000);color:var(--text)}
-    .intro{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:#000;animation:introOut .9s ease 3.4s forwards}.intro-inner{text-align:center;animation:introZoom 3s ease forwards}.intro img{width:220px;max-width:55vw;filter:drop-shadow(0 0 28px rgba(246,195,67,.65))}.intro h1{font-size:clamp(38px,7vw,92px);letter-spacing:.14em;margin:18px 0 0;background:linear-gradient(90deg,#8a5d00,#ffe08a,#fff3bd,#c88900);-webkit-background-clip:text;color:transparent;text-shadow:0 0 22px rgba(246,195,67,.45)}.intro-line{height:2px;width:0;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:22px auto;animation:line 2.4s ease .5s forwards}@keyframes introZoom{0%{opacity:0;transform:scale(.45)}40%{opacity:1;transform:scale(1.05)}100%{transform:scale(1)}}@keyframes line{to{width:min(560px,75vw)}}@keyframes introOut{to{opacity:0;visibility:hidden}}
-    header{position:sticky;top:0;z-index:50;background:rgba(5,5,5,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}.nav{max-width:1280px;margin:auto;display:flex;align-items:center;gap:18px;padding:14px 22px}.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.08em}.brand img{width:52px;height:52px;object-fit:cover;border-radius:14px;box-shadow:0 0 22px rgba(246,195,67,.28)}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}.tabs button,.gold-btn{border:1px solid var(--border);background:linear-gradient(180deg,#2a210f,#120f08);color:#fff;border-radius:999px;padding:10px 14px;cursor:pointer}.tabs button:hover,.gold-btn:hover{border-color:var(--gold);box-shadow:0 0 18px rgba(246,195,67,.22)}
-    .hero{max-width:1280px;margin:0 auto;padding:60px 22px 28px}.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}.hero-card{min-height:360px;border:1px solid var(--border);border-radius:28px;padding:34px;background:linear-gradient(135deg,rgba(246,195,67,.18),rgba(0,0,0,.25)),url('logo.jpg') center/cover;position:relative;overflow:hidden}.hero-card:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#000 0%,rgba(0,0,0,.72) 42%,rgba(0,0,0,.15));}.hero-content{position:relative;z-index:1;max-width:620px}.badge{display:inline-flex;color:#111;background:linear-gradient(90deg,var(--gold),#fff0a5);font-weight:900;border-radius:999px;padding:8px 12px;margin-bottom:16px}.hero h2{font-size:clamp(36px,6vw,78px);line-height:.95;margin:0 0 14px}.hero p{color:#ddd;font-size:18px}.search{width:100%;padding:16px 18px;border-radius:18px;border:1px solid var(--border);background:#0f0f0f;color:#fff;font-size:16px;margin-top:22px}.mini-panel{border:1px solid var(--border);border-radius:28px;background:linear-gradient(180deg,#141414,#080808);padding:22px}.stat{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08)}.stat:last-child{border-bottom:0}.stat b{color:var(--gold)}
-    main{max-width:1280px;margin:auto;padding:0 22px 60px}.section{margin-top:32px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:16px}.section h3{font-size:30px;margin:0}.muted{color:var(--muted)}.rail{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}.card{background:linear-gradient(180deg,#181818,#0e0e0e);border:1px solid rgba(255,255,255,.08);border-radius:22px;overflow:hidden;min-height:170px;box-shadow:0 14px 40px rgba(0,0,0,.25)}.poster{height:260px;background:#222 center/cover;display:grid;place-items:center;color:#555;font-size:42px}.card-body{padding:15px}.card h4{margin:0 0 8px}.pill{display:inline-block;color:#111;background:var(--gold);border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800}.game{padding:16px;border-radius:18px;background:#151515;border:1px solid rgba(255,255,255,.08);display:grid;gap:6px}.game strong{color:var(--gold2)}
-    .admin-wrap{max-width:1280px;margin:26px auto;padding:0 22px}.admin{display:none;border:1px solid var(--border);border-radius:26px;background:rgba(17,17,17,.96);padding:20px}.login{display:flex;gap:8px;flex-wrap:wrap}.admin input,.admin select,.admin textarea,.login input{background:#080808;color:#fff;border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:12px}.admin textarea{min-height:80px}.form-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.form-grid textarea{grid-column:span 2}.danger{background:#2a0b0b!important;border-color:rgba(239,68,68,.4)!important}.notice{padding:12px 14px;border:1px solid var(--border);border-radius:16px;background:#121212;color:#ddd;margin:12px 0}.hidden{display:none!important}@media(max-width:850px){.hero-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.form-grid textarea{grid-column:auto}.tabs{margin-left:0}.nav{flex-wrap:wrap}.poster{height:220px}}
-  </style>
+<meta charset="UTF-8">
+<title>DANIVIA TV</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0b0b0b;
+  color: white;
+}
+
+/* INTRO */
+#intro {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeOut 2s ease 3s forwards;
+}
+
+#intro img {
+  width: 220px;
+  animation: zoom 2s;
+}
+
+@keyframes zoom {
+  from {transform: scale(0.5); opacity: 0;}
+  to {transform: scale(1);}
+}
+
+@keyframes fadeOut {
+  to {opacity: 0; visibility: hidden;}
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  padding: 20px;
+}
+
+header img {
+  width: 120px;
+}
+
+h1 {
+  color: gold;
+}
+
+/* AGENDA */
+.agenda-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  padding: 20px;
+}
+
+.agenda-card {
+  background: linear-gradient(145deg, #181818, #0b0b0b);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.agenda-card h3 {
+  margin: 10px 0;
+}
+
+.agenda-card p {
+  color: #ccc;
+}
+
+.league {
+  color: gold;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* ADMIN */
+#adminPanel {
+  display: none;
+  padding: 20px;
+}
+
+input, button {
+  padding: 10px;
+  margin: 5px;
+}
+</style>
 </head>
+
 <body>
-  <div class="intro"><div class="intro-inner"><img src="logo.jpg" alt="DANIVIA TV"><h1>DANIVIA TV</h1><div class="intro-line"></div><p>Entrando en la plataforma...</p></div></div>
-  <header><div class="nav"><div class="brand"><img src="logo.jpg" alt="DANIVIA TV"><span>DANIVIA TV</span></div><div class="tabs"><button onclick="scrollToId('agenda')">Agenda</button><button onclick="scrollToId('peliculasSec')">Películas</button><button onclick="scrollToId('seriesSec')">Series</button><button onclick="toggleAdmin()">Admin</button></div></div></header>
-  <section class="hero"><div class="hero-grid"><div class="hero-card"><div class="hero-content"><span class="badge">VERSIÓN PRO</span><h2>Agenda, películas y series en una sola plataforma</h2><p>Contenido dinámico conectado a Firebase. Diseño premium oscuro y dorado.</p><input id="search" class="search" placeholder="Buscar película, serie o evento..." oninput="renderAll()"></div></div><div class="mini-panel"><h3>Estado</h3><div class="stat"><span>Firebase</span><b id="firebaseState">Conectado</b></div><div class="stat"><span>Agenda</span><b id="agendaState">Manual / API</b></div><div class="stat"><span>Admin</span><b id="authState">Sin login</b></div><div class="notice">Para agenda automática real hace falta una API deportiva y una tarea diaria en GitHub Actions o Firebase Functions.</div></div></div></section>
-  <div class="admin-wrap"><div id="loginBox" class="login"><input id="email" placeholder="Email admin"><input id="password" type="password" placeholder="Contraseña"><button class="gold-btn" onclick="login()">Entrar</button></div><div id="adminPanel" class="admin"><h2>Panel Admin</h2><p class="muted">Añade tarjetas con imagen, descripción y categoría. Tipo debe ser película, serie o deporte.</p><div class="form-grid"><input id="titulo" placeholder="Título"><select id="tipo"><option value="pelicula">Película</option><option value="serie">Serie</option><option value="deporte">Deporte</option></select><input id="imagen" placeholder="URL imagen/poster"><input id="fecha" placeholder="Fecha / hora"><textarea id="descripcion" placeholder="Descripción"></textarea><input id="enlace" placeholder="Enlace / trailer"><button class="gold-btn" onclick="guardar()">Guardar</button><button class="gold-btn danger" onclick="logout()">Salir</button></div></div></div>
-  <main><section id="agenda" class="section"><div class="section-head"><div><h3>⚽ Agenda Deportiva</h3><p class="muted">Eventos guardados en Firebase. La automatización diaria se conecta después con API.</p></div><button class="gold-btn" onclick="cargarDemoAgenda()">Demo agenda</button></div><div id="deportes" class="rail"></div></section><section id="peliculasSec" class="section"><div class="section-head"><h3>🎬 Últimas Películas</h3></div><div id="peliculas" class="rail"></div></section><section id="seriesSec" class="section"><div class="section-head"><h3>📺 Últimas Series</h3></div><div id="series" class="rail"></div></section></main>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-    const firebaseConfig={apiKey:"AIzaSyBU_NaJoIBweCc_xfU3t92CkBdi7McPqdI",authDomain:"daniviatv-8ccbc.firebaseapp.com",projectId:"daniviatv-8ccbc",storageBucket:"daniviatv-8ccbc.firebasestorage.app",messagingSenderId:"481386290072",appId:"1:481386290072:web:af80ef40bd52db3f33a9ed"};
-    const app=initializeApp(firebaseConfig), auth=getAuth(app), db=getFirestore(app); let items=[];
-    window.scrollToId=(id)=>document.getElementById(id).scrollIntoView({behavior:'smooth'});
-    window.toggleAdmin=()=>document.getElementById('loginBox').classList.toggle('hidden');
-    window.login=async()=>{try{await signInWithEmailAndPassword(auth,email.value,password.value)}catch(e){alert('Error login: '+e.message)}};
-    window.logout=async()=>signOut(auth);
-    onAuthStateChanged(auth,(user)=>{document.getElementById('authState').textContent=user?'Admin activo':'Sin login';document.getElementById('adminPanel').style.display=user?'block':'none'});
-    window.guardar=async()=>{if(!titulo.value.trim())return alert('Pon un título');await addDoc(collection(db,'contenido'),{titulo:titulo.value.trim(),tipo:tipo.value,imagen:imagen.value.trim(),fecha:fecha.value.trim(),descripcion:descripcion.value.trim(),enlace:enlace.value.trim(),createdAt:serverTimestamp()});titulo.value=imagen.value=fecha.value=descripcion.value=enlace.value='';};
-    window.cargarDemoAgenda=async()=>{await addDoc(collection(db,'contenido'),{titulo:'Real Madrid vs Barcelona',tipo:'deporte',fecha:'Hoy · 21:00',descripcion:'Partido destacado',createdAt:serverTimestamp()});};
-    onSnapshot(query(collection(db,'contenido'),orderBy('createdAt','desc')),(snap)=>{items=snap.docs.map(d=>({id:d.id,...d.data()}));renderAll();},(err)=>{document.getElementById('firebaseState').textContent='Error';console.error(err)});
-    window.renderAll=()=>{const s=(document.getElementById('search').value||'').toLowerCase();const filtered=items.filter(x=>(x.titulo||'').toLowerCase().includes(s)||(x.descripcion||'').toLowerCase().includes(s));render('peliculas',filtered.filter(x=>x.tipo==='pelicula'));render('series',filtered.filter(x=>x.tipo==='serie'));render('deportes',filtered.filter(x=>x.tipo==='deporte'),true);};
-    function render(id,list,isSport=false){const el=document.getElementById(id);if(!list.length){el.innerHTML='<div class="notice">Aún no hay contenido.</div>';return}el.innerHTML=list.map(x=>isSport?`<div class="game"><strong>${esc(x.titulo)}</strong><span>${esc(x.fecha||'Horario por confirmar')}</span><small class="muted">${esc(x.descripcion||'')}</small></div>`:`<article class="card"><div class="poster" style="background-image:${x.imagen?`url('${escAttr(x.imagen)}')`:'none'}">${x.imagen?'':'★'}</div><div class="card-body"><span class="pill">${x.tipo==='pelicula'?'PELÍCULA':'SERIE'}</span><h4>${esc(x.titulo)}</h4><p class="muted">${esc(x.descripcion||'Sin descripción')}</p>${x.enlace?`<a class="gold-btn" href="${escAttr(x.enlace)}" target="_blank">Ver</a>`:''}</div></article>`).join('')}
-    function esc(v){return String(v||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))} function escAttr(v){return esc(v).replace(/'/g,'&#39;')}
-  </script>
+
+<!-- INTRO -->
+<div id="intro">
+  <img src="logo.jpg">
+</div>
+
+<header>
+  <img src="logo.jpg">
+  <h1>DANIVIA TV</h1>
+</header>
+
+<!-- LOGIN -->
+<div style="text-align:center;">
+  <input id="email" placeholder="email">
+  <input id="password" type="password" placeholder="password">
+  <button onclick="login()">Login</button>
+  <button onclick="logout()">Logout</button>
+</div>
+
+<!-- ADMIN -->
+<div id="adminPanel">
+  <h2>Panel Admin</h2>
+  <input id="titulo" placeholder="Título">
+  <input id="tipo" placeholder="pelicula / serie / deporte">
+  <button onclick="guardar()">Guardar</button>
+</div>
+
+<!-- AGENDA -->
+<section>
+  <h2 style="text-align:center;">⚽ Agenda Deportiva España</h2>
+  <div id="agenda" class="agenda-grid"></div>
+</section>
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBU_NaJoIBweCc_xfU3t92CkBdi7McPqdI",
+  authDomain: "daniviatv-8ccbc.firebaseapp.com",
+  projectId: "daniviatv-8ccbc",
+  storageBucket: "daniviatv-8ccbc.firebasestorage.app",
+  messagingSenderId: "481386290072",
+  appId: "1:481386290072:web:af80ef40bd52db3f33a9ed"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const db = getFirestore();
+
+/* LOGIN */
+window.login = async function() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    document.getElementById("adminPanel").style.display = "block";
+  } catch {
+    alert("Error login");
+  }
+}
+
+window.logout = function() {
+  signOut(auth);
+  document.getElementById("adminPanel").style.display = "none";
+}
+
+/* GUARDAR */
+window.guardar = async function() {
+  const titulo = document.getElementById("titulo").value;
+  const tipo = document.getElementById("tipo").value;
+
+  await addDoc(collection(db, "contenido"), { titulo, tipo });
+}
+
+/* AGENDA AUTOMÁTICA */
+onSnapshot(collection(db, "agenda"), (snapshot) => {
+  const agenda = document.getElementById("agenda");
+  agenda.innerHTML = "";
+
+  snapshot.forEach(doc => {
+    const d = doc.data();
+
+    agenda.innerHTML += `
+      <div class="agenda-card">
+        <div class="league">${d.liga}</div>
+        <h3>${d.partido}</h3>
+        <p>📅 ${d.fecha}</p>
+        <p>⏰ ${d.hora}</p>
+        <p>🏟️ ${d.estadio}</p>
+      </div>
+    `;
+  });
+});
+</script>
+
 </body>
 </html>
