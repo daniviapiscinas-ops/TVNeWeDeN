@@ -6,135 +6,234 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #0b0b0b;
-  color: white;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#050505;
+  color:white;
 }
-
-/* INTRO */
-#intro {
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  animation: fadeOut 2s ease 3s forwards;
+#intro{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle,#2a2100,#000 60%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  animation:introOut 1s ease 3s forwards;
 }
-
-#intro img {
-  width: 220px;
-  animation: zoom 2s;
+#intro img{
+  width:240px;
+  filter:drop-shadow(0 0 35px gold);
+  animation:introZoom 2.5s ease;
 }
-
-@keyframes zoom {
-  from {transform: scale(0.5); opacity: 0;}
-  to {transform: scale(1);}
+@keyframes introZoom{
+  from{transform:scale(.4);opacity:0}
+  to{transform:scale(1);opacity:1}
 }
-
-@keyframes fadeOut {
-  to {opacity: 0; visibility: hidden;}
+@keyframes introOut{
+  to{opacity:0;visibility:hidden}
 }
-
-/* HEADER */
-header {
-  text-align: center;
-  padding: 20px;
+header{
+  min-height:70vh;
+  padding:30px;
+  background:linear-gradient(to bottom,rgba(0,0,0,.2),#050505), radial-gradient(circle at top,#4d3b00,#000 55%);
+  text-align:center;
 }
-
-header img {
-  width: 120px;
+header img{
+  width:150px;
+  filter:drop-shadow(0 0 20px gold);
 }
-
-h1 {
-  color: gold;
+h1{
+  color:gold;
+  font-size:44px;
+  margin:20px 0 5px;
 }
-
-/* AGENDA */
-.agenda-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-  padding: 20px;
+.subtitle{
+  color:#ccc;
+  font-size:18px;
 }
-
-.agenda-card {
-  background: linear-gradient(145deg, #181818, #0b0b0b);
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  border-radius: 15px;
-  padding: 15px;
+.nav{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-top:30px;
 }
-
-.agenda-card h3 {
-  margin: 10px 0;
+.nav a{
+  color:white;
+  text-decoration:none;
+  background:#181818;
+  border:1px solid rgba(255,215,0,.35);
+  padding:12px 18px;
+  border-radius:999px;
 }
-
-.agenda-card p {
-  color: #ccc;
+section{
+  padding:35px 22px;
 }
-
-.league {
-  color: gold;
-  font-size: 12px;
-  font-weight: bold;
+section h2{
+  color:gold;
+  margin-bottom:18px;
 }
-
-/* ADMIN */
-#adminPanel {
-  display: none;
-  padding: 20px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
 }
-
-input, button {
-  padding: 10px;
-  margin: 5px;
+.card{
+  background:linear-gradient(145deg,#181818,#080808);
+  border:1px solid rgba(255,215,0,.25);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 30px rgba(255,215,0,.06);
+}
+.card img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  background:#111;
+}
+.card-content{
+  padding:16px;
+}
+.card h3{
+  margin:0 0 8px;
+}
+.card p{
+  color:#bbb;
+  font-size:14px;
+}
+.card a{
+  display:inline-block;
+  margin-top:8px;
+  color:#000;
+  background:gold;
+  padding:9px 14px;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:bold;
+}
+.agenda-card{
+  padding:18px;
+}
+.badge{
+  color:#000;
+  background:gold;
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:bold;
+}
+.admin-login,.admin-panel{
+  margin:25px auto;
+  max-width:900px;
+  background:#101010;
+  border:1px solid rgba(255,215,0,.35);
+  border-radius:22px;
+  padding:20px;
+}
+.admin-panel{
+  display:none;
+}
+input,textarea,select,button{
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+  border-radius:12px;
+  border:0;
+}
+button{
+  background:gold;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+}
+.admin-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px;
+}
+footer{
+  text-align:center;
+  color:#777;
+  padding:35px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
 <div id="intro">
-  <img src="logo.jpg">
+  <img src="logo.jpg" alt="DANIVIA TV">
 </div>
 
 <header>
-  <img src="logo.jpg">
+  <img src="logo.jpg" alt="DANIVIA TV">
   <h1>DANIVIA TV</h1>
+  <p class="subtitle">Agenda deportiva, películas y series en una sola plataforma</p>
+
+  <div class="nav">
+    <a href="#agenda">Agenda</a>
+    <a href="#peliculas">Películas</a>
+    <a href="#series">Series</a>
+    <a href="#admin">Admin</a>
+  </div>
 </header>
 
-<!-- LOGIN -->
-<div style="text-align:center;">
-  <input id="email" placeholder="email">
-  <input id="password" type="password" placeholder="password">
-  <button onclick="login()">Login</button>
-  <button onclick="logout()">Logout</button>
-</div>
-
-<!-- ADMIN -->
-<div id="adminPanel">
-  <h2>Panel Admin</h2>
-  <input id="titulo" placeholder="Título">
-  <input id="tipo" placeholder="pelicula / serie / deporte">
-  <button onclick="guardar()">Guardar</button>
-</div>
-
-<!-- AGENDA -->
-<section>
-  <h2 style="text-align:center;">⚽ Agenda Deportiva España</h2>
-  <div id="agenda" class="agenda-grid"></div>
+<section id="agenda">
+  <h2>⚽ Agenda Deportiva España</h2>
+  <div id="agendaGrid" class="grid"></div>
 </section>
 
-<!-- FIREBASE -->
+<section id="peliculas">
+  <h2>🎬 Últimas Películas</h2>
+  <div id="peliculasGrid" class="grid"></div>
+</section>
+
+<section id="series">
+  <h2>📺 Últimas Series</h2>
+  <div id="seriesGrid" class="grid"></div>
+</section>
+
+<section id="admin">
+  <h2>🔐 Panel Admin</h2>
+
+  <div class="admin-login">
+    <input id="email" type="email" placeholder="Email admin">
+    <input id="password" type="password" placeholder="Contraseña">
+    <button onclick="login()">Entrar como admin</button>
+    <button onclick="logout()">Cerrar sesión</button>
+  </div>
+
+  <div id="adminPanel" class="admin-panel">
+    <h3>Añadir contenido</h3>
+
+    <div class="admin-grid">
+      <select id="tipo">
+        <option value="pelicula">Película</option>
+        <option value="serie">Serie</option>
+      </select>
+
+      <input id="titulo" placeholder="Título">
+      <input id="imagen" placeholder="URL de imagen/cartel">
+      <input id="enlace" placeholder="Enlace trailer o página">
+    </div>
+
+    <textarea id="descripcion" placeholder="Descripción"></textarea>
+    <button onclick="guardarContenido()">Guardar contenido</button>
+  </div>
+</section>
+
+<footer>
+  DANIVIA TV © 2026
+</footer>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBU_NaJoIBweCc_xfU3t92CkBdi7McPqdI",
@@ -149,50 +248,103 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore();
 
-/* LOGIN */
-window.login = async function() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    document.getElementById("adminPanel").style.display = "block";
-  } catch {
-    alert("Error login");
+window.login = async function(){
+  try{
+    await signInWithEmailAndPassword(
+      auth,
+      document.getElementById("email").value,
+      document.getElementById("password").value
+    );
+    document.getElementById("adminPanel").style.display="block";
+    alert("Admin conectado");
+  }catch(e){
+    alert("Error de login");
   }
-}
+};
 
-window.logout = function() {
-  signOut(auth);
-  document.getElementById("adminPanel").style.display = "none";
-}
+window.logout = async function(){
+  await signOut(auth);
+  document.getElementById("adminPanel").style.display="none";
+};
 
-/* GUARDAR */
-window.guardar = async function() {
-  const titulo = document.getElementById("titulo").value;
+window.guardarContenido = async function(){
   const tipo = document.getElementById("tipo").value;
+  const titulo = document.getElementById("titulo").value;
+  const imagen = document.getElementById("imagen").value;
+  const enlace = document.getElementById("enlace").value;
+  const descripcion = document.getElementById("descripcion").value;
 
-  await addDoc(collection(db, "contenido"), { titulo, tipo });
-}
+  if(!titulo){
+    alert("Pon un título");
+    return;
+  }
 
-/* AGENDA AUTOMÁTICA */
-onSnapshot(collection(db, "agenda"), (snapshot) => {
-  const agenda = document.getElementById("agenda");
-  agenda.innerHTML = "";
+  await addDoc(collection(db,"contenido"),{
+    tipo,
+    titulo,
+    imagen,
+    enlace,
+    descripcion,
+    creado: serverTimestamp()
+  });
 
-  snapshot.forEach(doc => {
-    const d = doc.data();
+  alert("Contenido guardado");
+  document.getElementById("titulo").value="";
+  document.getElementById("imagen").value="";
+  document.getElementById("enlace").value="";
+  document.getElementById("descripcion").value="";
+};
 
-    agenda.innerHTML += `
-      <div class="agenda-card">
-        <div class="league">${d.liga}</div>
-        <h3>${d.partido}</h3>
-        <p>📅 ${d.fecha}</p>
-        <p>⏰ ${d.hora}</p>
-        <p>🏟️ ${d.estadio}</p>
+onSnapshot(collection(db,"agenda"), snapshot=>{
+  const box=document.getElementById("agendaGrid");
+  box.innerHTML="";
+
+  if(snapshot.empty){
+    box.innerHTML="<p>No hay partidos disponibles todavía.</p>";
+    return;
+  }
+
+  snapshot.forEach(doc=>{
+    const d=doc.data();
+    box.innerHTML+=`
+      <div class="card agenda-card">
+        <span class="badge">${d.liga || "España"}</span>
+        <h3>${d.partido || "Partido por confirmar"}</h3>
+        <p>📅 ${d.fecha || "Fecha por confirmar"}</p>
+        <p>⏰ ${d.hora || "Hora por confirmar"}</p>
+        <p>🏟️ ${d.estadio || "Estadio por confirmar"}</p>
       </div>
     `;
   });
+});
+
+onSnapshot(collection(db,"contenido"), snapshot=>{
+  const peliculas=document.getElementById("peliculasGrid");
+  const series=document.getElementById("seriesGrid");
+
+  peliculas.innerHTML="";
+  series.innerHTML="";
+
+  snapshot.forEach(doc=>{
+    const d=doc.data();
+
+    const card=`
+      <div class="card">
+        ${d.imagen ? `<img src="${d.imagen}" alt="${d.titulo}">` : ""}
+        <div class="card-content">
+          <h3>${d.titulo || ""}</h3>
+          <p>${d.descripcion || ""}</p>
+          ${d.enlace ? `<a href="${d.enlace}" target="_blank">Ver más</a>` : ""}
+        </div>
+      </div>
+    `;
+
+    if(d.tipo==="pelicula") peliculas.innerHTML+=card;
+    if(d.tipo==="serie") series.innerHTML+=card;
+  });
+
+  if(!peliculas.innerHTML) peliculas.innerHTML="<p>No hay películas añadidas todavía.</p>";
+  if(!series.innerHTML) series.innerHTML="<p>No hay series añadidas todavía.</p>";
 });
 </script>
 
