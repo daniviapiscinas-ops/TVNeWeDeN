@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danivia TV Neweden</title>  <!-- Firebase SDK -->  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>  <style>
+    body { margin:0; font-family:Arial; background:#0b0f1a; color:white; }
+
+    header { text-align:center; padding:20px; border-bottom:1px solid #00eaff; }
+
+    header img { width:120px; margin-bottom:10px; }
+
+    h1 { color:#00eaff; margin:0; }
+
+    nav { display:flex; justify-content:center; gap:15px; padding:10px; }
+
+    nav button { background:#111; color:#00eaff; border:1px solid #00eaff; padding:10px; cursor:pointer; }
+
+    section { display:none; padding:20px; }
+    section.active { display:block; }
+
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:15px; }
+
+    .card { background:#111827; padding:15px; border-radius:10px; }
+
+    .card img { width:100%; border-radius:8px; }
+
+    .agenda-item { border-bottom:1px solid #333; padding:10px 0; }
+
+  </style></head>
+<body><header>
+  <!-- PON AQUÍ TU LOGO -->
+  <img src="logo.png" alt="Danivia TV">
+  <h1>Danivia TV Neweden</h1>
+  <p>Canales · Películas · Series · Deportes</p>
+</header><nav>
+  <button onclick="show('canales')">Canales</button>
+  <button onclick="show('pelis')">Películas</button>
+  <button onclick="show('series')">Series</button>
+  <button onclick="show('agenda')">Agenda</button>
+</nav><section id="canales" class="active">
+  <h2>Canales</h2>
+  <div id="canalesList" class="grid"></div>
+</section><section id="pelis">
+  <h2>Películas</h2>
+  <div id="pelisList" class="grid"></div>
+</section><section id="series">
+  <h2>Series</h2>
+  <div id="seriesList" class="grid"></div>
+</section><section id="agenda">
+  <h2>Agenda Deportiva</h2>
+  <div id="agendaList"></div>
+</section><script>
+  const firebaseConfig = {
+    apiKey: "TU_API_KEY",
+    authDomain: "TU_DOMINIO",
+    projectId: "TU_ID"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  function show(id){
+    document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function cargarColeccion(nombre, contenedor){
+    db.collection(nombre).onSnapshot(snapshot=>{
+      const div=document.getElementById(contenedor);
+      div.innerHTML='';
+
+      snapshot.forEach(doc=>{
+        const d=doc.data();
+        div.innerHTML += `
+          <div class="card">
+            <img src="${d.img || ''}">
+            <h3>${d.titulo}</h3>
+            <p>${d.descripcion || ''}</p>
+          </div>
+        `;
+      });
+    });
+  }
+
+  function cargarAgenda(){
+    db.collection('agenda').orderBy('hora').onSnapshot(snapshot=>{
+      const div=document.getElementById('agendaList');
+      div.innerHTML='';
+
+      snapshot.forEach(doc=>{
+        const d=doc.data();
+        div.innerHTML += `
+          <div class="agenda-item">
+            <strong>${d.hora}</strong> - ${d.evento}
+          </div>
+        `;
+      });
+    });
+  }
+
+  cargarColeccion('canales','canalesList');
+  cargarColeccion('peliculas','pelisList');
+  cargarColeccion('series','seriesList');
+  cargarAgenda();
+
+</script></body>
+</html>
