@@ -1,52 +1,100 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DANIVIA TV Pro</title>
-  <meta name="description" content="DANIVIA TV Pro: agenda deportiva, películas, series, intro premium y panel admin Firebase." />
-  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  <meta charset="UTF-8">
+  <title>DANIVIA TV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
-    :root{--bg:#050505;--panel:#0d0d0f;--panel2:#151518;--gold:#ffc133;--gold2:#ffe29a;--text:#fff7df;--muted:#b8ac91;--line:rgba(255,193,51,.22);--ok:#40d887;--danger:#ff5f6d;--radius:26px;--shadow:0 24px 70px rgba(0,0,0,.55)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at 50% -10%,#4c3205 0,#15100a 24%,#050505 58%,#000 100%);min-height:100vh;overflow-x:hidden}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}.wrap{width:min(1220px,92vw);margin:auto}.hidden{display:none!important}
-    body:before{content:"";position:fixed;inset:0;background-image:radial-gradient(rgba(255,193,51,.14) 1px,transparent 1.5px);background-size:22px 22px;mask-image:linear-gradient(#000,transparent 82%);pointer-events:none;z-index:-1}.glow{position:fixed;width:38vw;height:38vw;border-radius:50%;background:rgba(255,193,51,.08);filter:blur(80px);right:-12vw;top:18vh;z-index:-1}
-    #intro{position:fixed;inset:0;background:#020202;z-index:999;display:grid;place-items:center;transition:opacity .7s ease,visibility .7s ease}.intro-card{text-align:center;animation:introZoom 2.4s ease both}.intro-card img{width:min(260px,68vw);border-radius:42px;box-shadow:0 0 75px rgba(255,193,51,.55)}.intro-title{font-size:clamp(40px,8vw,94px);font-weight:1000;letter-spacing:.1em;margin:24px 0 8px;background:linear-gradient(#fff8c7,#ffc133 45%,#7b4b00);-webkit-background-clip:text;color:transparent}.intro-line{height:3px;width:0;margin:18px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:line 2s ease forwards}.intro-sub{color:var(--gold2);letter-spacing:.35em;text-transform:uppercase;font-size:13px}.skip{position:fixed;right:18px;bottom:18px;background:rgba(255,193,51,.12);color:var(--gold2);border:1px solid var(--line);padding:10px 14px;border-radius:999px;cursor:pointer}@keyframes introZoom{0%{opacity:0;transform:scale(.72)}35%{opacity:1;transform:scale(1)}80%{opacity:1;transform:scale(1.03)}100%{opacity:1;transform:scale(1)}}@keyframes line{to{width:min(360px,70vw)}}
-    header{position:sticky;top:0;z-index:20;background:rgba(4,4,5,.72);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.nav{display:flex;align-items:center;justify-content:space-between;padding:13px 0;gap:18px}.brand{display:flex;align-items:center;gap:12px;font-weight:1000;letter-spacing:.12em}.brand img{width:52px;height:52px;border-radius:16px;object-fit:cover;box-shadow:0 0 26px rgba(255,193,51,.32)}.navlinks{display:flex;gap:10px;flex-wrap:wrap}.pill,.adminBtn,.logoutBtn{border:1px solid var(--line);background:rgba(255,193,51,.08);color:var(--text);padding:10px 14px;border-radius:999px;cursor:pointer}.adminBtn{background:linear-gradient(135deg,#ffdf80,#b47100);color:#1b1202;font-weight:900}.logoutBtn{background:rgba(255,95,109,.12);border-color:rgba(255,95,109,.35);color:#ffd6da}
-    .hero{padding:56px 0 28px;display:grid;grid-template-columns:1.06fr .94fr;gap:34px;align-items:center}.kicker{color:var(--gold2);font-weight:900;letter-spacing:.2em;text-transform:uppercase}.hero h1{font-size:clamp(44px,7.4vw,92px);line-height:.88;margin:14px 0;background:linear-gradient(#fff9c9,#ffc133 48%,#6f4300);-webkit-background-clip:text;color:transparent}.hero p{font-size:18px;color:var(--muted);line-height:1.65;max-width:720px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.cta{background:linear-gradient(135deg,var(--gold2),#b97900);color:#171004;border:0;border-radius:18px;padding:14px 18px;font-weight:1000;cursor:pointer}.ghost{background:#101012;color:var(--text);border:1px solid var(--line);border-radius:18px;padding:14px 18px;cursor:pointer}.screen{background:linear-gradient(145deg,rgba(255,193,51,.18),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:34px;padding:18px;box-shadow:var(--shadow);position:relative;overflow:hidden}.screen img{width:100%;display:block;border-radius:26px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.stat{background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:14px}.stat b{font-size:25px;color:var(--gold2)}.stat span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
-    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0}.toolbar input,.toolbar select{background:#0d0d0f;color:var(--text);border:1px solid var(--line);border-radius:16px;padding:13px 14px;outline:none}.toolbar input{flex:1;min-width:240px}.section{padding:34px 0}.sectionTitle{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:18px}.sectionTitle h2{font-size:34px;margin:0}.sectionTitle p{color:var(--muted);margin:6px 0 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid rgba(255,193,51,.16);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}.card:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(255,193,51,.14),transparent 38%);pointer-events:none}.poster{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:20px;background:#080808;border:1px solid rgba(255,255,255,.06);margin-bottom:13px}.tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,193,51,.12);border:1px solid var(--line);color:var(--gold2);padding:6px 10px;border-radius:999px;font-size:12px;font-weight:900;text-transform:uppercase}.card h3{margin:13px 0 8px;font-size:22px}.meta{color:var(--muted);font-size:14px;line-height:1.55}.watch{display:inline-block;margin-top:12px;color:#1a1103;background:linear-gradient(135deg,var(--gold2),var(--gold));padding:9px 12px;border-radius:13px;font-weight:900}.empty{grid-column:1/-1;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--radius);padding:28px}
-    .adminPanel{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.76);backdrop-filter:blur(10px);display:grid;place-items:center;padding:18px}.modal{width:min(1050px,96vw);max-height:92vh;overflow:auto;background:#08080a;border:1px solid var(--line);border-radius:30px;box-shadow:var(--shadow);padding:22px}.modalHead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.modalHead h2{margin:0}.close{background:#111;color:var(--text);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:10px 13px;cursor:pointer}.form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.form label{display:grid;gap:7px;color:var(--muted);font-size:13px}.form input,.form select,.form textarea{width:100%;background:#111114;color:var(--text);border:1px solid var(--line);border-radius:15px;padding:12px;outline:none}.form textarea{min-height:88px;resize:vertical}.full{grid-column:1/-1}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.primary{background:linear-gradient(135deg,var(--gold2),#a86d00);color:#171004;border:0;border-radius:15px;padding:12px 16px;font-weight:1000;cursor:pointer}.secondary{background:#151519;color:var(--text);border:1px solid var(--line);border-radius:15px;padding:12px 16px;cursor:pointer}.danger{background:rgba(255,95,109,.14);color:#ffd7da;border:1px solid rgba(255,95,109,.35);border-radius:13px;padding:9px 11px;cursor:pointer}.adminList{margin-top:18px;display:grid;gap:10px}.adminItem{display:flex;justify-content:space-between;gap:12px;align-items:center;background:#111114;border:1px solid rgba(255,255,255,.08);padding:12px;border-radius:17px}.toast{position:fixed;right:18px;bottom:18px;background:#111114;border:1px solid var(--line);border-radius:17px;padding:14px 16px;box-shadow:var(--shadow);z-index:80;color:var(--text)}footer{border-top:1px solid rgba(255,193,51,.12);padding:30px 0;color:var(--muted);text-align:center;margin-top:30px}
-    @media(max-width:900px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.form{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}.navlinks{width:100%}.stats{grid-template-columns:1fr}.hero{padding-top:34px}}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0d0d0d;
+      color: white;
+      text-align: center;
+    }
+
+    /* INTRO */
+    #intro {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      flex-direction: column;
+      animation: fadeOut 2s ease 3s forwards;
+    }
+
+    #intro img {
+      width: 200px;
+      animation: zoom 2s ease;
+    }
+
+    @keyframes zoom {
+      from {transform: scale(0.5); opacity: 0;}
+      to {transform: scale(1); opacity: 1;}
+    }
+
+    @keyframes fadeOut {
+      to {opacity: 0; visibility: hidden;}
+    }
+
+    header {
+      padding: 20px;
+    }
+
+    header img {
+      width: 120px;
+    }
+
+    h1 {
+      margin-top: 10px;
+      color: gold;
+    }
+
+    section {
+      margin: 30px;
+    }
+
+    .card {
+      background: #1a1a1a;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 10px;
+    }
   </style>
 </head>
+
 <body>
-  <div class="glow"></div>
-  <div id="intro"><div class="intro-card"><img src="./assets/logo.jpg" alt="DANIVIA TV"><div class="intro-title">DANIVIA TV</div><div class="intro-line"></div><div class="intro-sub">Sports · Movies · Series</div></div><button class="skip" id="skipIntro">Saltar intro</button></div>
-  <header><div class="wrap nav"><a class="brand" href="#"><img src="./assets/logo.jpg" alt="DANIVIA TV"><span>DANIVIA TV</span></a><nav class="navlinks"><a class="pill" href="#agenda">Agenda</a><a class="pill" href="#peliculas">Películas</a><a class="pill" href="#series">Series</a><button class="adminBtn" id="openAdmin">Admin</button><button class="logoutBtn hidden" id="logoutBtn">Salir</button></nav></div></header>
-  <main class="wrap"><section class="hero"><div><div class="kicker">Versión Pro</div><h1>Tu canal premium de agenda, cine y series.</h1><p>Web dinámica con intro, diseño premium, Firebase Authentication para el admin y Firestore para publicar contenido al instante. Preparada para GitHub Pages.</p><div class="hero-actions"><a class="cta" href="#agenda">Ver agenda de hoy</a><button class="ghost" id="replayIntro">Repetir intro</button></div><div class="toolbar"><input id="globalSearch" placeholder="Buscar en toda la web..."><select id="dayFilter"><option value="">Todas las fechas</option><option value="today">Hoy</option><option value="tomorrow">Mañana</option><option value="week">Esta semana</option></select></div></div><div class="screen"><img src="./assets/logo.jpg" alt="DANIVIA TV"><div class="stats"><div class="stat"><b id="sportsCount">0</b><span>eventos</span></div><div class="stat"><b id="moviesCount">0</b><span>películas</span></div><div class="stat"><b id="seriesCount">0</b><span>series</span></div></div></div></section>
-  <section class="section" id="agenda"><div class="sectionTitle"><div><h2>Agenda deportiva</h2><p>Eventos ordenados por fecha y hora.</p></div></div><div class="toolbar"><input id="sportsSearch" placeholder="Buscar equipo, deporte o competición"><select id="sportsFilter"><option value="">Todos</option><option>Fútbol</option><option>Baloncesto</option><option>Tenis</option><option>Motor</option><option>Otro</option></select></div><div class="grid" id="sportsGrid"></div></section>
-  <section class="section" id="peliculas"><div class="sectionTitle"><div><h2>Últimas películas</h2><p>Estrenos, novedades y enlaces destacados.</p></div></div><div class="grid" id="moviesGrid"></div></section>
-  <section class="section" id="series"><div class="sectionTitle"><div><h2>Últimas series</h2><p>Temporadas, episodios y lanzamientos.</p></div></div><div class="grid" id="seriesGrid"></div></section></main>
-  <footer>© <span id="year"></span> DANIVIA TV · Firebase + GitHub Pages</footer>
-  <div class="adminPanel hidden" id="adminPanel"><div class="modal"><div class="modalHead"><h2>Panel admin</h2><button class="close" id="closeAdmin">Cerrar</button></div><div id="loginBox"><div class="form"><label>Email admin<input id="email" type="email" placeholder="admin@danivia.tv"></label><label>Contraseña<input id="password" type="password" placeholder="••••••••"></label></div><div class="actions"><button class="primary" id="loginBtn">Entrar</button></div></div><div id="adminBox" class="hidden"><form id="contentForm" class="form"><input type="hidden" id="editId"><input type="hidden" id="editCollection"><label>Sección<select id="collection"><option value="sports">Agenda deportiva</option><option value="movies">Películas</option><option value="series">Series</option></select></label><label>Título<input id="title" required placeholder="Ej. Real Madrid vs Barça"></label><label>Categoría<input id="category" placeholder="Fútbol, Acción, Drama..."></label><label>Fecha<input id="date" type="date"></label><label>Hora<input id="time" type="time"></label><label>Imagen URL<input id="image" placeholder="https://..."></label><label>Enlace<input id="link" placeholder="https://..."></label><label class="full">Descripción<textarea id="description" placeholder="Descripción breve..."></textarea></label></form><div class="actions"><button class="primary" id="saveBtn">Guardar</button><button class="secondary" id="resetBtn">Nuevo</button><button class="secondary" id="seedBtn">Crear ejemplos</button></div><div class="adminList" id="adminList"></div></div></div></div><div id="toast" class="toast hidden"></div>
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js';
-    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js';
-    import { getFirestore, collection, addDoc, setDoc, doc, deleteDoc, onSnapshot, query, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js';
-    const firebaseConfig={apiKey:'TU_API_KEY',authDomain:'TU_PROYECTO.firebaseapp.com',projectId:'TU_PROYECTO',storageBucket:'TU_PROYECTO.appspot.com',messagingSenderId:'TU_SENDER_ID',appId:'TU_APP_ID'};
-    const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);const $=id=>document.getElementById(id);const state={sports:[],movies:[],series:[],user:null};const labels={sports:'Agenda',movies:'Película',series:'Serie'};
-    const escape=s=>String(s||'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));const toast=m=>{const t=$('toast');t.textContent=m;t.classList.remove('hidden');setTimeout(()=>t.classList.add('hidden'),2600)};const today=()=>new Date().toISOString().slice(0,10);
-    function closeIntro(){intro.style.opacity='0';intro.style.visibility='hidden';sessionStorage.setItem('daniviaIntro','1')}const intro=$('intro');$('skipIntro').onclick=closeIntro;$('replayIntro').onclick=()=>{sessionStorage.removeItem('daniviaIntro');intro.style.opacity='1';intro.style.visibility='visible';setTimeout(closeIntro,3200)};if(sessionStorage.getItem('daniviaIntro'))closeIntro();else setTimeout(closeIntro,3600);
-    function matchDate(item){const f=$('dayFilter').value;if(!f||!item.date)return true;const d=new Date(item.date+'T00:00:00'),n=new Date(today()+'T00:00:00');const diff=Math.round((d-n)/86400000);return f==='today'?diff===0:f==='tomorrow'?diff===1:f==='week'?diff>=0&&diff<=7:true}
-    function card(item,type){const tag=escape(item.category||labels[type]);const img=item.image?`<img class="poster" src="${escape(item.image)}" alt="${escape(item.title)}" loading="lazy">`:'';const when=[item.date,item.time].filter(Boolean).join(' · ');return `<article class="card">${img}<span class="tag">${tag}</span><h3>${escape(item.title)}</h3><div class="meta">${when?`<b>${escape(when)}</b><br>`:''}${escape(item.description||'')}</div>${item.link?`<a class="watch" href="${escape(item.link)}" target="_blank" rel="noopener">Ver más</a>`:''}</article>`}
-    function render(){const q=($('globalSearch').value||'').toLowerCase();['sports','movies','series'].forEach(type=>{let data=state[type].filter(x=>JSON.stringify(x).toLowerCase().includes(q)).filter(matchDate);if(type==='sports'){const s=($('sportsSearch').value||'').toLowerCase(),f=$('sportsFilter').value;data=data.filter(x=>JSON.stringify(x).toLowerCase().includes(s)).filter(x=>!f||x.category===f)}$(type+'Grid').innerHTML=data.length?data.map(x=>card(x,type)).join(''):'<div class="empty">Todavía no hay contenido publicado.</div>';$(type+'Count').textContent=state[type].length});renderAdmin()}
-    function listen(type){onSnapshot(query(collection(db,type),orderBy('date','desc')),snap=>{state[type]=snap.docs.map(d=>({id:d.id,...d.data()}));render()},err=>{console.warn(err);$(type+'Grid').innerHTML='<div class="empty">Configura Firebase para cargar contenido dinámico.</div>'})}['sports','movies','series'].forEach(listen);
-    ['globalSearch','dayFilter','sportsSearch','sportsFilter'].forEach(id=>$(id).addEventListener('input',render));$('year').textContent=new Date().getFullYear();
-    $('openAdmin').onclick=()=>$('adminPanel').classList.remove('hidden');$('closeAdmin').onclick=()=>$('adminPanel').classList.add('hidden');$('loginBtn').onclick=async()=>{try{await signInWithEmailAndPassword(auth,$('email').value,$('password').value);toast('Admin conectado')}catch(e){toast('Error de login: '+e.message)}};$('logoutBtn').onclick=()=>signOut(auth);
-    onAuthStateChanged(auth,u=>{state.user=u;$('loginBox').classList.toggle('hidden',!!u);$('adminBox').classList.toggle('hidden',!u);$('logoutBtn').classList.toggle('hidden',!u);renderAdmin()});
-    function formData(){return{title:$('title').value,category:$('category').value,date:$('date').value,time:$('time').value,image:$('image').value,link:$('link').value,description:$('description').value,updatedAt:serverTimestamp()}}function resetForm(){$('contentForm').reset();$('editId').value='';$('editCollection').value=''}$('resetBtn').onclick=resetForm;
-    $('saveBtn').onclick=async()=>{if(!state.user)return toast('Inicia sesión');const col=$('editCollection').value||$('collection').value,id=$('editId').value,data=formData();try{if(id)await setDoc(doc(db,col,id),data,{merge:true});else await addDoc(collection(db,col),{...data,createdAt:serverTimestamp()});resetForm();toast('Guardado')}catch(e){toast('Error: '+e.message)}};
-    function renderAdmin(){if(!state.user)return;const all=['sports','movies','series'].flatMap(t=>state[t].map(x=>({...x,type:t}))).slice(0,50);$('adminList').innerHTML=all.map(x=>`<div class="adminItem"><div><b>${escape(x.title)}</b><div class="meta">${labels[x.type]} · ${escape(x.date||'sin fecha')}</div></div><div><button class="secondary" data-edit="${x.type}|${x.id}">Editar</button> <button class="danger" data-del="${x.type}|${x.id}">Borrar</button></div></div>`).join('')||'<div class="empty">Sin contenido.</div>';document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>{const [type,id]=b.dataset.edit.split('|'),x=state[type].find(i=>i.id===id);$('editId').value=id;$('editCollection').value=type;$('collection').value=type;['title','category','date','time','image','link','description'].forEach(k=>$(k).value=x[k]||'')});document.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{const [type,id]=b.dataset.del.split('|');if(confirm('¿Borrar este contenido?')){await deleteDoc(doc(db,type,id));toast('Borrado')}})}
-    $('seedBtn').onclick=async()=>{if(!state.user)return;const samples={sports:[{title:'Partido destacado de hoy',category:'Fútbol',date:today(),time:'21:00',description:'Evento principal de la agenda deportiva.',image:'',link:''}],movies:[{title:'Estreno destacado',category:'Acción',date:today(),description:'Nueva película añadida a DANIVIA TV.',image:'',link:''}],series:[{title:'Nueva temporada',category:'Drama',date:today(),description:'Serie destacada de la semana.',image:'',link:''}]};for(const c of Object.keys(samples))for(const item of samples[c])await addDoc(collection(db,c),{...item,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});toast('Ejemplos creados')};
-  </script>
+
+<!-- INTRO -->
+<div id="intro">
+  <img src="logo.jpg" alt="logo">
+</div>
+
+<!-- CONTENIDO -->
+<header>
+  <img src="logo.jpg" alt="logo">
+  <h1>DANIVIA TV</h1>
+</header>
+
+<section>
+  <h2>⚽ Agenda Deportiva</h2>
+  <div class="card">Próximamente...</div>
+</section>
+
+<section>
+  <h2>🎬 Últimas Películas</h2>
+  <div class="card">Próximamente...</div>
+</section>
+
+<section>
+  <h2>📺 Últimas Series</h2>
+  <div class="card">Próximamente...</div>
+</section>
+
 </body>
 </html>
