@@ -8,22 +8,25 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
+// 🇪🇸 SOLO ESPAÑA
 const leagues = [
-  { name: "La Liga", id: "4335" },
-  { name: "Champions League", id: "4480" },
-  { name: "Premier League", id: "4328" }
+  { name: "LaLiga EA Sports", id: "4335" },
+  { name: "LaLiga Hypermotion", id: "4400" },
+  { name: "Copa del Rey", id: "4483" }
 ];
 
 async function main() {
   const agendaRef = db.collection("agenda");
 
+  // 🔥 BORRAR TODO LO ANTERIOR
   const old = await agendaRef.get();
   const batch = db.batch();
-
   old.forEach(doc => batch.delete(doc.ref));
 
+  // 🔄 CARGAR NUEVA AGENDA
   for (const league of leagues) {
     const url = `https://www.thesportsdb.com/api/v1/json/3/eventsnextleague.php?id=${league.id}`;
+    
     const res = await fetch(url);
     const data = await res.json();
 
@@ -31,20 +34,21 @@ async function main() {
 
     for (const event of events) {
       const ref = agendaRef.doc(event.idEvent);
+
       batch.set(ref, {
         liga: league.name,
         partido: event.strEvent || "",
         fecha: event.dateEvent || "",
         hora: event.strTime || "",
         estadio: event.strVenue || "",
-        pais: event.strCountry || "",
+        pais: "España",
         actualizado: new Date().toISOString()
       });
     }
   }
 
   await batch.commit();
-  console.log("Agenda actualizada correctamente");
+  console.log("Agenda española actualizada 🇪🇸");
 }
 
 main().catch(err => {
